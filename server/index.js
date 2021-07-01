@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const logger = require('./logger');
 
 const argv = require('./argv');
@@ -17,7 +18,17 @@ const app = express();
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
+app.use(
+  ['/api', '/socket.io'],
+  createProxyMiddleware({
+    target: 'https://demo3.traccar.org',
+    ws: true,
+    changeOrigin: false,
+  }),
+);
+
 // In production we need to pass these values in instead of relying on webpack
+
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/',

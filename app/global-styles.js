@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
   html,
   body {
     height: 100%;
@@ -16,9 +21,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #fafafa;
+    background-color: #fff;
     min-height: 100%;
     min-width: 100%;
+    font-size:1.0rem
+
   }
 
   p,
